@@ -45,7 +45,7 @@ app.get('/sell/:ticker/:shares', checkTickerAndShares, (req, res) => {
   );
 });
 
-// 100. Let's create one more endpoint for users to query the price of a particular stock at /price/:ticker.  Since the user can send the data in either uppercase, lowercase, or a combination, let's create the ticker variable and toUpperCase() the route parameter that they send
+// 100. Let's create one more endpoint for users to query the price of a particular stock at /price/:ticker.  Since the user can send the data in either uppercase, lowercase, or a combination, let's create the ticker variable and toUpperCase() the route parameter that they sent
 app.get('/price/:ticker', (req, res) => {
   const ticker = req.params.ticker.toUpperCase();
 });
