@@ -21,10 +21,11 @@ const prices = {
   XYZ: 5.32,
 };
 
-app.get('/buy/:ticker/:shares', (req, res) => {
+// 140.  Now let's go back to validation checking of the '/buy' and '/sell' routes.  Since we will be doing similar checks to make sure that the 'ticker' exists and the number of 'shares' are valid on both routes, we can extract the validation into a separate middleware function.  Let's insert a middleware function name 'checkTickerAndShares' in the '/buy' and '/sell' routes.  The middleware function should be inserted as the second('middle') argument after the route and before the callback function.
+
+app.get('/buy/:ticker/:shares', checkTickerAndShares, (req, res) => {
   const ticker = req.params.ticker;
   const shares = req.params.shares;
-
   const total = shares * prices[ticker];
 
   res.send(
@@ -33,8 +34,6 @@ app.get('/buy/:ticker/:shares', (req, res) => {
     }/share for a total of $${total}.`,
   );
 });
-
-// 090.  Now, let's create the /sell endpoint, which is structured very similar to the /buy endpoint.  Copy the /buy route that you just created and modify it to a '/sell/:ticker/shares' route
 
 app.get('/sell/:ticker/:shares', checkTickerAndShares, (req, res) => {
   const ticker = req.params.ticker;
@@ -45,4 +44,14 @@ app.get('/sell/:ticker/:shares', checkTickerAndShares, (req, res) => {
       prices[ticker]
     }/share for a total of $${total}.`,
   );
+});
+
+app.get('/price/:ticker', (req, res) => {
+  const ticker = req.param.ticker;
+
+  if (!(ticker in prices)) {
+    res.send('Error: the ticker you entered is invalid.');
+  } else {
+    res.send(`The price of ${ticker} is $${prices[ticker]}.`);
+  }
 });

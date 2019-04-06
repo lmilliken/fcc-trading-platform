@@ -6,10 +6,16 @@ app.listen(3000, function() {
 });
 
 app.get('/hi', (req, res) => {
-  res.send('Hi there!');
+  res.send('Hi there trader!');
 });
 
-// 040.  Now we create our repository of stock tickers and their prices
+// 040.  Now we need create a repository of stock tickers and their prices.  Create a Javascript object name 'prices' consisting of key-value pairs of tickers and their prices, you can make up these tickers and prices:
+// {
+//   AAPL: 140.29,
+//   AMZN: 1793.30
+// }
+// For this project, make sure that your tickers are all in uppercase.
+
 const prices = {
   ABC: 48.83,
   DEF: 2.98,

@@ -24,7 +24,6 @@ const prices = {
 app.get('/buy/:ticker/:shares', (req, res) => {
   const ticker = req.params.ticker;
   const shares = req.params.shares;
-
   const total = shares * prices[ticker];
 
   res.send(
@@ -33,8 +32,6 @@ app.get('/buy/:ticker/:shares', (req, res) => {
     }/share for a total of $${total}.`,
   );
 });
-
-// 090.  Now, let's create the /sell endpoint, which is structured very similar to the /buy endpoint.  Copy the /buy route that you just created and modify it to a '/sell/:ticker/shares' route
 
 app.get('/sell/:ticker/:shares', checkTickerAndShares, (req, res) => {
   const ticker = req.params.ticker;
@@ -45,4 +42,10 @@ app.get('/sell/:ticker/:shares', checkTickerAndShares, (req, res) => {
       prices[ticker]
     }/share for a total of $${total}.`,
   );
+});
+
+// 110. Since the user can send the data in either uppercase, lowercase, or a combination.  To be consistent with the ticker keys that we created in 'prices' above, let's use the 'toUpperCase()' method on the route parameter that they sent and assign it to a variable name 'ticker'.
+
+app.get('/price/:ticker', (req, res) => {
+  const ticker = req.param.ticker;
 });

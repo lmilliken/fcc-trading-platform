@@ -21,10 +21,15 @@ const prices = {
   XYZ: 5.32,
 };
 
-app.get('/buy/:ticker/:shares', (req, res) => {
+const checkTickerAndShares = (req, res, next) => {
+  // 160.  As previously mentioned, the user may send the ticker route parameter in lowercase, uppercase, or a combination of both.  To be consistent with the 'prices' repository, we need to modify it to be all uppercase using the toUpperCase() method.
+  // Modify the 'req.params.ticker' so that it is all in upper case, like 'req.params.ticker = req.params.ticker.toUpperCase();'
+  req.params.ticker = req.params.ticker.toUpperCase();
+};
+
+app.get('/buy/:ticker/:shares', checkTickerAndShares, (req, res) => {
   const ticker = req.params.ticker;
   const shares = req.params.shares;
-
   const total = shares * prices[ticker];
 
   res.send(
@@ -33,8 +38,6 @@ app.get('/buy/:ticker/:shares', (req, res) => {
     }/share for a total of $${total}.`,
   );
 });
-
-// 090.  Now, let's create the /sell endpoint, which is structured very similar to the /buy endpoint.  Copy the /buy route that you just created and modify it to a '/sell/:ticker/shares' route
 
 app.get('/sell/:ticker/:shares', checkTickerAndShares, (req, res) => {
   const ticker = req.params.ticker;
@@ -45,4 +48,14 @@ app.get('/sell/:ticker/:shares', checkTickerAndShares, (req, res) => {
       prices[ticker]
     }/share for a total of $${total}.`,
   );
+});
+
+app.get('/price/:ticker', (req, res) => {
+  const ticker = req.param.ticker;
+
+  if (!(ticker in prices)) {
+    res.send('Error: the ticker you entered is invalid.');
+  } else {
+    res.send(`The price of ${ticker} is $${prices[ticker]}.`);
+  }
 });

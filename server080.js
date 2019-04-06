@@ -27,7 +27,10 @@ app.get('/buy/:ticker/:shares', (req, res) => {
 
   const total = shares * prices[ticker];
 
-  // 080. We are going to follow the happy path for now and assume that the information sent to the API are all valid, but we'll come back to validation later.  Now we send back a response confirming that the trade was made.
+  // 080. We are going to follow the happy path for now and assume that the information sent to the API are all valid, but we'll come back to validation later.  Now we send back a response confirming that the trade was made.  Send a response back to the client with a message confirming the trade, be sure to include the ticker, number of shares, price per share, and total amount
+
+  // Now you should be able to test this route and receive a response.
+
   res.send(
     `Transaction complete, you purchased ${shares} shares of ${ticker} at $${
       prices[ticker]

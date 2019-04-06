@@ -23,5 +23,7 @@ const prices = {
 
 // 050.  Let create our /buy endpoint.
 // We want users to be able to make a purchase by sending the required information as part of the route.  For example, if they want to buy 20 shares of stock ABC, they would go to /buy/ABC/20
-// Route parameters are specified with :, like /buy/:ticker/:shares
+// We specify route parameter in the path with ':', for example '/buy/:ticker'
+// Express allows us to access the :ticker route parameter in the callback with the 'params' object, like 'req.params.ticker'
+// Now create a .get() route that accepts a 'ticker' and 'shares' that the user want to buy.  You will also need to provide a callback to the .get() method as a second argument, for now, we'll simply provide '(req, res) => {}'
 app.get('/buy/:ticker/:shares', (req, res) => {});
