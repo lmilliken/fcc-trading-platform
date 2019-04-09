@@ -24,7 +24,7 @@ const prices = {
 const checkTickerAndShares = (req, res, next) => {
   req.params.ticker = req.params.ticker.toUpperCase();
 
-  // 170. Using an 'if' statement, check that if the ticker parameter does not exist, 'return' the 'res' with the message 'Error: the ticker you entered is invalid.'
+  // 170. Using an 'if' statement, check that if the ticker parameter does not exist, send the 'res' with the message 'Error: the ticker you entered is invalid.'
   if (!(req.params.ticker in prices)) {
     res.send('Error: the ticker you entered is invalid.');
   }
@@ -54,7 +54,7 @@ app.get('/sell/:ticker/:shares', checkTickerAndShares, (req, res) => {
 });
 
 app.get('/price/:ticker', (req, res) => {
-  const ticker = req.param.ticker;
+  const ticker = req.params.ticker.toUpperCase();
 
   if (!(ticker in prices)) {
     res.send('Error: the ticker you entered is invalid.');

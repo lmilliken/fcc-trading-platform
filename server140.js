@@ -47,7 +47,7 @@ app.get('/sell/:ticker/:shares', checkTickerAndShares, (req, res) => {
 });
 
 app.get('/price/:ticker', (req, res) => {
-  const ticker = req.param.ticker;
+  const ticker = req.params.ticker.toUpperCase();
 
   if (!(ticker in prices)) {
     res.send('Error: the ticker you entered is invalid.');

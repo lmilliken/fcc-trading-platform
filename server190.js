@@ -25,16 +25,16 @@ const checkTickerAndShares = (req, res, next) => {
   req.params.ticker = req.params.ticker.toUpperCase();
 
   if (!(req.params.ticker in prices)) {
-    return res.send('Error: the ticker you entered is invalid.');
+    res.send('Error: the ticker you entered is invalid.');
+  } else if (!parseInt(req.params.shares)) {
+    res.send('Error: the number of shares submitted is invalid.');
   }
 
-  if (!parseInt(req.params.shares)) {
-    return res.send('Error: the number of shares submitted is invalid');
+  // 190.  At this point in the  code, we now know that the ticker is valid and that req.params.shares can be parsed into a valid integer.
+  // Add an 'else' statement and modify the shares params to ensure that it is a valid integer.  We can modify it with 'req.params.shares = parseInt(req.params.shares)'
+  else {
+    req.params.shares = parseInt(req.params.shares);
   }
-
-  // 190.  At this point in your code, we know that the req.params.shares can be parsed into a valid integer.
-  // Let's modify the shares params to ensure that it is a valid integer.  We can modify it with 'req.params.shares = parseInt(req.params.shares)'
-  req.params.shares = parseInt(req.params.shares);
 };
 
 app.get('/buy/:ticker/:shares', checkTickerAndShares, (req, res) => {
@@ -61,7 +61,7 @@ app.get('/sell/:ticker/:shares', checkTickerAndShares, (req, res) => {
 });
 
 app.get('/price/:ticker', (req, res) => {
-  const ticker = req.param.ticker;
+  const ticker = req.params.ticker.toUpperCase();
 
   if (!(ticker in prices)) {
     res.send('Error: the ticker you entered is invalid.');

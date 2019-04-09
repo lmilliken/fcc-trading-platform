@@ -22,7 +22,7 @@ const prices = {
 };
 
 app.get('/buy/:ticker/:shares', (req, res) => {
-  // 070. Express allows us to access the :ticker route parameter in the callback with the 'params' object, like 'req.params.ticker'.  Create two variables name 'ticker' and 'shares', assign them values from the 'req'.
+  // 070. Express allows us to access the :ticker route parameter in the callback with the 'params' object, like 'req.params.ticker'.  Create two variables name 'ticker' and 'shares', assign them the corresponding values from 'req'.
   const ticker = req.params.ticker;
   const shares = req.params.shares;
 });

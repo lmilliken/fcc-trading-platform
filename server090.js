@@ -34,9 +34,9 @@ app.get('/buy/:ticker/:shares', (req, res) => {
   );
 });
 
-// 090.  Now, let's create the /sell endpoint, which is structured very similar to the /buy endpoint.  Copy the /buy route that you just created and modify it to a '/sell/:ticker/shares' route
+// 090.  Now, let's create the /sell endpoint, which is structured very similar to the /buy endpoint.  Copy the /buy route that you just created and modify it to a '/sell/:ticker/shares' route.  In the response, be sure to include the ticker, number of shares, price per share, and total amount.
 
-app.get('/sell/:ticker/:shares', checkTickerAndShares, (req, res) => {
+app.get('/sell/:ticker/:shares', (req, res) => {
   const ticker = req.params.ticker;
   const shares = req.params.shares;
   const total = shares * prices[ticker];

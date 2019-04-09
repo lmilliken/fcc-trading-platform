@@ -34,7 +34,7 @@ app.get('/buy/:ticker/:shares', (req, res) => {
   );
 });
 
-app.get('/sell/:ticker/:shares', checkTickerAndShares, (req, res) => {
+app.get('/sell/:ticker/:shares', (req, res) => {
   const ticker = req.params.ticker;
   const shares = req.params.shares;
   const total = shares * prices[ticker];
@@ -45,6 +45,6 @@ app.get('/sell/:ticker/:shares', checkTickerAndShares, (req, res) => {
   );
 });
 
-// 100. Let's create one more endpoint for users to query the price of a particular stock at /price/:ticker.  Remember that  will also need to provide a callback to the .get() method as a second argument, for now, we'll simply provide '(req, res) => {}'
+// 100. Let's create one more endpoint for users to query the price of a particular stock at /price/:ticker.  Remember that  will also need to provide a callback function to the .get() method as a second argument, for now, we'll simply provide '(req, res) => {}'
 
 app.get('/price/:ticker', (req, res) => {});

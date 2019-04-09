@@ -33,7 +33,7 @@ app.get('/buy/:ticker/:shares', (req, res) => {
   );
 });
 
-app.get('/sell/:ticker/:shares', checkTickerAndShares, (req, res) => {
+app.get('/sell/:ticker/:shares', (req, res) => {
   const ticker = req.params.ticker;
   const shares = req.params.shares;
   const total = shares * prices[ticker];
@@ -45,7 +45,7 @@ app.get('/sell/:ticker/:shares', checkTickerAndShares, (req, res) => {
 });
 
 app.get('/price/:ticker', (req, res) => {
-  const ticker = req.param.ticker;
+  const ticker = req.params.ticker.toUpperCase();
 
   // 120. Now let's check to make sure that 'ticker' exists in 'prices', we can use the 'in' operator.
   //Set up a conditional logic so that if 'ticker' doesn't exists in 'prices', send back a response saying 'Error: the ticker you entered is invalid.'
